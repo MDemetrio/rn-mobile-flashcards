@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
 } from 'react-native';
 import { getDeck } from "../helpers/repository";
+
 export default class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { deck } = navigation.state.params;
-
+    const deck = navigation.getParam('deckTitle', 'Deck');
     return {
-      title: deck ? `Deck ${deck.title}` : 'Deck',
+      title: deck
     };
   };
+  
   state = {
     deck: {}
   }
+  
   componentDidMount() {
     this._navListener = this.props.navigation.addListener('willFocus', () => {
-      const { deck } = this.props.navigation.state.params;
-      if (deck) {
-        getDeck(deck.title).then(deck => this.setState({ deck }));
-      }
+       const deckTitle = this.props.navigation.getParam('deckTitle', 'Deck');
+       if (deckTitle) {
+         getDeck(deckTitle).then(deck => this.setState({ deck }));
+       }
     });
   }
 
@@ -41,11 +42,11 @@ export default class DeckDetail extends Component {
         </View>
         <View>
           <TouchableOpacity style={styles.button} onPress={() =>
-            this.props.navigation.navigate('NewCard', { deck })}>
+            this.props.navigation.navigate('NewCard', { deckTitle: deck.title })}>
             <Text style={styles.cardCountText}>New Card</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() =>
-            this.props.navigation.navigate('QuizPage', { deck })}>
+            this.props.navigation.navigate('QuizPage', { deckTitle: deck.title })}>
             <Text style={styles.cardCountText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
@@ -82,4 +83,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
