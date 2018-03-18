@@ -93,6 +93,18 @@ export default class QuizPage extends Component {
     });
   };
 
+  _restartQuiz = () => {
+    this.setState(({deck}) => ({
+      answerShown: false,
+      points: 0,
+      endReached: false,
+      currentQuestion: { position: 0, ...deck.questions[0] },
+    }));
+  };
+
+  _backToDeck = () => {
+    this.props.navigation.goBack();
+  };
   render() {
     const {
       deck,
@@ -110,6 +122,18 @@ export default class QuizPage extends Component {
           <Text style={styles.deckNameText}>
             {`Congrats!! You got ${points} questions right`}
           </Text>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this._restartQuiz()}>
+            <Text style={styles.cardCountText}>Restart Quiz</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this._backToDeck(false)}>
+            <Text style={styles.cardCountText}>Back to deck</Text>
+          </TouchableOpacity>
         </View>
       : <View style={styles.container}>
           <Text
@@ -119,7 +143,7 @@ export default class QuizPage extends Component {
           <Text style={styles.deckNameText}>
             {currentQuestion && currentQuestion.question}
           </Text>
-          
+
           {Platform.OS === 'ios'
             ? <View>
                 <Text style={styles.deckNameText}>
@@ -131,7 +155,7 @@ export default class QuizPage extends Component {
                   style={StyleSheet.absoluteFill}
                 />
               </View>
-            : <View style={{opacity: answerShown ? 1 : 0 }}>
+            : <View style={{ opacity: answerShown ? 1 : 0 }}>
                 <Text style={styles.deckNameText}>
                   {currentQuestion && currentQuestion.answer}
                 </Text>
