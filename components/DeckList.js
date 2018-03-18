@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   FlatList,
   StyleSheet,
   Text,
@@ -21,39 +20,50 @@ export default class DeckList extends Component {
 
   state = { decks: [] };
 
- componentDidMount() {
+  componentDidMount() {
     this._navListener = this.props.navigation.addListener('willFocus', () => {
-      StatusBar.setBarStyle('dark-content');
-      getDecks().then(decks => this.setState({decks}))
+      StatusBar.setBarStyle('light-content');
+      getDecks().then(decks => this.setState({ decks }));
     });
   }
-  
+
   componentWillUnmount() {
     this._navListener.remove();
   }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ flex: 1 }}>
         <StatusBar barStyle="dark-content" />
-        <FlatList
-          horizontal
-          data={this.state.decks}
-          keyExtractor={(item, index) => item.title}
-          renderItem={({ item }) => (
-            <View style={[styles.item, styles.shadow]}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('DeckDetail', { deck: item })}>
-                <Text style={styles.deckNameText}>
-                  {item.title}
-                </Text>
-                <Text style={styles.cardCountText}>
-                  {item.cardCount} cards
-                </Text>
-              </TouchableOpacity>
+        {this.state.decks
+          ? <View style={styles.container}>
+              <FlatList
+                horizontal
+                data={this.state.decks}
+                keyExtractor={item => item.title}
+                renderItem={({ item }) => (
+                  <View style={[styles.item, styles.shadow]}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('DeckDetail', {
+                          deckTitle: item.title,
+                        })}>
+                      <Text style={styles.deckNameText}>
+                        {item.title}
+                      </Text>
+                      <Text style={styles.cardCountText}>
+                        {item.cardCount} cards
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
             </View>
-          )}
-        />
+          : <View style={styles.noDecksContainer}>
+              <Text style={styles.deckNameText}>
+                You have not created a deck yet.
+              </Text>
+            </View>}
       </View>
     );
   }
@@ -65,6 +75,11 @@ const styles = StyleSheet.create({
     paddingTop: 48,
     paddingBottom: 48,
     backgroundColor: '#566270',
+  },
+  noDecksContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFF3',
+    justifyContent: 'center',
   },
   item: {
     width: 275,
@@ -97,4 +112,3 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
 });
-
