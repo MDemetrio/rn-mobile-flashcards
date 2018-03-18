@@ -5,11 +5,11 @@ import {
   View,
   TouchableOpacity,
   StatusBar,
-  TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
+import TextField from '../shared/TextField'
 
-import { saveDeckTitle, getDeck } from '../helpers/repository';
+import { saveDeckTitle } from '../helpers/repository';
 
 export default class NewDeck extends Component {
   static navigationOptions = {
@@ -22,8 +22,9 @@ export default class NewDeck extends Component {
   state = { title: '' };
 
   componentDidMount() {
-    this._navListener = this.props.navigation.addListener('didFocus', () => {
+    this._navListener = this.props.navigation.addListener('willFocus', () => {
       StatusBar.setBarStyle('dark-content');
+      this.setState({title: ''})
     });
   }
 
@@ -33,31 +34,25 @@ export default class NewDeck extends Component {
 
   handleSubmit = async () => {
     const deck = await saveDeckTitle(this.state.title);
-    console.log(deck);
     this.props.navigation.navigate('DeckDetail', {
-      deck
+      deckTitle: deck.title,
     });
   };
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
 
         <View>
           <Text style={styles.deckNameText}>
             What is the title of your new deck?
           </Text>
         </View>
-        <View>
-          <TextInput
-            style={[
-              { height: 40, borderColor: 'gray', borderWidth: 1 },
-              styles.cardCountText,
-            ]}
-            onChangeText={title => this.setState({ title })}
+          <TextField
+            onChange={title => this.setState({ title })}
             value={this.state.title}
+            placeholder={'Deck Name'}
           />
-        </View>
         <View>
           <TouchableOpacity
             style={styles.button}
@@ -82,12 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: '#A593E0',
     fontWeight: '200',
-  },
-  cardCountText: {
-    fontSize: 24,
-    textAlign: 'center',
-    color: '#566270',
-    fontWeight: '300',
   },
   button: {
     alignItems: 'center',
