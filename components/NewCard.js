@@ -1,64 +1,62 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
+
+import TextField from '../shared/TextField';
 
 import { addCardToDeck } from '../helpers/repository';
 
 export default class NewCard extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { deck } = navigation.state.params;
-
+    const deck = navigation.getParam('deckTitle', 'Deck');
     return {
-      title: deck ? `Add card to ${deck.title}` : 'New Card',
+      title: deck,
     };
   };
+
   state = {
     card: {
       question: '',
       answer: '',
     },
   };
+
   handleSubmit = async () => {
-    const { deck } = this.props.navigation.state.params;
-    await addCardToDeck({ title: deck.title, card: this.state.card });
+       const deckTitle = this.props.navigation.getParam('deckTitle', 'Deck');
+       if (deckTitle) {
+       await addCardToDeck({ title: deckTitle, card: this.state.card });
+       }
 
     this.props.navigation.goBack();
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View>
           <Text style={styles.deckNameText}>New Card</Text>
         </View>
         <View>
-          <TextInput
-            style={[
-              { height: 40, borderColor: 'gray', borderWidth: 1 },
-              styles.cardCountText,
-            ]}
-            onChangeText={question =>
+          <TextField
+            onChange={question =>
               this.setState(prevState => ({
                 card: { ...prevState.card, question },
               }))}
             value={this.state.card.question}
+            placeholder={'Question'}
           />
-          <TextInput
-            style={[
-              { height: 40, borderColor: 'gray', borderWidth: 1 },
-              styles.cardCountText,
-            ]}
-            onChangeText={answer =>
+          <TextField
+            onChange={answer =>
               this.setState(prevState => ({
                 card: { ...prevState.card, answer },
               }))}
             value={this.state.card.answer}
+            placeholder={'Answer'}
           />
         </View>
         <View>
@@ -68,7 +66,7 @@ export default class NewCard extends Component {
             <Text style={styles.cardCountText}>Submit</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
