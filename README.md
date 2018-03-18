@@ -1,3 +1,23 @@
+# Objective
+This is the final project done for the Udacity's React Developer Nanodegree.
+
+The [first one](https://github.com/MDemetrio/reactnd-project-myreads-starter) was about React fundamentals.
+
+the [second](https://github.com/MDemetrio/udacity-readable) focus on Redux and state management
+
+And this one is about React Native, the requirement was to do a flashcards app that let the user create decks and put cards in decks with questions and answers to help them learn and memorize new subjects, more information about flashcards methodology [here](https://en.wikipedia.org/wiki/Flashcard).
+
+# Tested platforms
+The app was tested on both android and ios (mainly via expo snack/appetize, but android was also tested locally with physical device and emulator too)
+
+I found [expo snack](https://snack.expo.io/) a super productive way to debug simple (non-ejected) React Native apps, since it runs on the browser via appetize, i recommend it if you don't have a powerful computer or want to debug ios but don't have access to a macOS.
+https://snack.expo.io/@mdemetrio/mobile-flashcards
+
+*The downsides of it is that you have to be copying and pasting code from your local computer to snack and vice-versa.*
+
+# Run
+### *The information below was provided by CRNA, it is super useful and clear to let anyone run and troubleshoot the project, so i decided to keep it instead of rewriting the instructions.*
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
