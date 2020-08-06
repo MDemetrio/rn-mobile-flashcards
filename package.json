@@ -21,7 +21,7 @@
   "dependencies": {
     "expo": "^25.0.0",
     "react": "16.2.0",
-    "react-native": "0.52.0",
+    "react-native": "0.53.3",
     "@expo/vector-icons": "6.2.1",
     "react-navigation": "4.4.0"
   }
