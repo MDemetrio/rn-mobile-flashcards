@@ -174,12 +174,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@expo/vector-icons@6.2.1":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-6.2.1.tgz#5252eed11e8863c0faf3e4f8d5006e41868d409d"
+"@expo/vector-icons@10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.2.0.tgz#3c70656683a6a873e18efc00bc61fc160a80dc55"
   dependencies:
     lodash "^4.17.4"
-    react-native-vector-icons "4.4.2"
 
 "@expo/vector-icons@^6.2.0":
   version "6.3.1"
@@ -4824,14 +4823,6 @@ react-native-scripts@2.0.1:
   dependencies:
     color "^2.0.1"
     lodash "^4.16.6"
-
-react-native-vector-icons@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.4.2.tgz#090f42ee0396c4cc4eae0ddaa518028ba8df40c7"
-  dependencies:
-    lodash "^4.0.0"
-    prop-types "^15.5.10"
-    yargs "^8.0.2"
 
 react-native-vector-icons@4.5.0:
   version "4.5.0"
