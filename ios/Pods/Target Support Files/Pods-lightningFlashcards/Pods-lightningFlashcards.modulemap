@@ -1,0 +1,6 @@
+module Pods_lightningFlashcards {
+  umbrella header "Pods-lightningFlashcards-umbrella.h"
+
+  export *
+  module * { export * }
+}
