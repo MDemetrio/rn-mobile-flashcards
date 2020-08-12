@@ -7,7 +7,7 @@ import {
   Animated,
   Platform,
 } from 'react-native';
-import { BlurView } from 'expo';
+import { BlurView } from 'expo-blur';
 import { getDeck, concludeStudySession } from '../helpers/repository';
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
@@ -94,7 +94,7 @@ export default class QuizPage extends Component {
   };
 
   _restartQuiz = () => {
-    this.setState(({deck}) => ({
+    this.setState(({ deck }) => ({
       answerShown: false,
       points: 0,
       endReached: false,
@@ -119,71 +119,71 @@ export default class QuizPage extends Component {
 
     return endReached
       ? <View style={styles.container}>
-          <Text style={styles.deckNameText}>
-            {`Congrats!! You got ${points} questions right`}
-          </Text>
+        <Text style={styles.deckNameText}>
+          {`Congrats!! You got ${points} questions right`}
+        </Text>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this._restartQuiz()}>
-            <Text style={styles.cardCountText}>Restart Quiz</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this._restartQuiz()}>
+          <Text style={styles.cardCountText}>Restart Quiz</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this._backToDeck(false)}>
-            <Text style={styles.cardCountText}>Back to deck</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this._backToDeck(false)}>
+          <Text style={styles.cardCountText}>Back to deck</Text>
+        </TouchableOpacity>
+      </View>
       : <View style={styles.container}>
-          <Text
-            style={[styles.deckNameText, { fontSize: 16, textAlign: 'left' }]}>
-            {currentPosition}
-          </Text>
-          <Text style={styles.deckNameText}>
-            {currentQuestion && currentQuestion.question}
-          </Text>
+        <Text
+          style={[styles.deckNameText, { fontSize: 16, textAlign: 'left' }]}>
+          {currentPosition}
+        </Text>
+        <Text style={styles.deckNameText}>
+          {currentQuestion && currentQuestion.question}
+        </Text>
 
-          {Platform.OS === 'ios'
-            ? <View>
-                <Text style={styles.deckNameText}>
-                  {currentQuestion && currentQuestion.answer}
-                </Text>
-                <AnimatedBlurView
-                  tint="default"
-                  intensity={this.state.intensity}
-                  style={StyleSheet.absoluteFill}
-                />
-              </View>
-            : <View style={{ opacity: answerShown ? 1 : 0 }}>
-                <Text style={styles.deckNameText}>
-                  {currentQuestion && currentQuestion.answer}
-                </Text>
-              </View>}
+        {Platform.OS === 'ios'
+          ? <View>
+            <Text style={styles.deckNameText}>
+              {currentQuestion && currentQuestion.answer}
+            </Text>
+            <AnimatedBlurView
+              tint="default"
+              intensity={this.state.intensity}
+              style={StyleSheet.absoluteFill}
+            />
+          </View>
+          : <View style={{ opacity: answerShown ? 1 : 0 }}>
+            <Text style={styles.deckNameText}>
+              {currentQuestion && currentQuestion.answer}
+            </Text>
+          </View>}
 
-          {answerShown
-            ? <View>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => this._nextQuestion(true)}>
-                  <Text style={styles.cardCountText}>Correct</Text>
-                </TouchableOpacity>
+        {answerShown
+          ? <View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this._nextQuestion(true)}>
+              <Text style={styles.cardCountText}>Correct</Text>
+            </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => this._nextQuestion(false)}>
-                  <Text style={styles.cardCountText}>Incorrect</Text>
-                </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this._nextQuestion(false)}>
+              <Text style={styles.cardCountText}>Incorrect</Text>
+            </TouchableOpacity>
 
-              </View>
-            : <View>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => this._showAnswer()}>
-                  <Text style={styles.cardCountText}>Show Answer</Text>
-                </TouchableOpacity>
-              </View>}
-        </View>;
+          </View>
+          : <View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this._showAnswer()}>
+              <Text style={styles.cardCountText}>Show Answer</Text>
+            </TouchableOpacity>
+          </View>}
+      </View>;
   }
 }
 
