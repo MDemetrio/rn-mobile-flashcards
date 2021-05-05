@@ -1617,9 +1617,9 @@
   dependencies:
     cross-spawn "^6.0.5"
 
-"@expo/vector-icons@12.0.3", "@expo/vector-icons@^12.0.0":
-  version "12.0.3"
-  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.3.tgz#d7379a3a6bfd4189bc6aed9b9d295f3aca6a5ece"
+"@expo/vector-icons@12.0.5", "@expo/vector-icons@^12.0.0":
+  version "12.0.5"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.5.tgz#bc508ad05fb7e9a3e008704977cfec6c18aa7728"
   dependencies:
     lodash.frompairs "^4.0.1"
     lodash.isequal "^4.5.0"
